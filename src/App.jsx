@@ -492,8 +492,6 @@ else if (command.startsWith("set a timer for")) {
 }
 
 
-
-
     else {
       response = `Sorry, I didn’t understand. You said: ${command}`;
     }
