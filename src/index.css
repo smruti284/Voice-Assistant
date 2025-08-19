@@ -1,0 +1,296 @@
+/* App.css */
+
+/* Global body with animated aurora */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(270deg, #1a1a2e, #0f3460, #000);
+  background-size: 600% 600%;
+  animation: aurora 18s ease infinite;
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Floating glowing orbs */
+body::before, body::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: floatOrb 25s infinite ease-in-out;
+  filter: blur(100px);
+    z-index: -1;
+
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  top: -250px;
+  left: -250px;
+  background: #00d4ff;
+}
+
+body::after {
+  width: 600px;
+  height: 600px;
+  bottom: -200px;
+  right: -200px;
+  background: #ff00ff;
+  animation-delay: 6s;
+}
+
+/* Floating spark particles */
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: sparkMove 10s infinite linear;
+}
+
+/* Assistant container */
+.voice-assistant {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 40px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  width: 420px;
+  animation: fadeIn 1.5s ease, breathe 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  position: relative;
+  backdrop-filter: blur(14px);
+}
+
+.voice-assistant:hover {
+  transform: rotateY(8deg) rotateX(4deg) scale(1.05);
+}
+
+/* AI Image glowing aura */
+.voice-assistant img {
+  width: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  animation: pulse 4s infinite, float 6s ease-in-out infinite, auraGlow 6s infinite alternate;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.9), 0 0 60px rgba(0, 229, 255, 0.4);
+  transition: transform 0.5s ease;
+}
+
+.voice-assistant img:hover {
+  transform: scale(1.15) rotateZ(3deg);
+}
+
+/* Assistant name with glitch */
+.voice-assistant h2 {
+  font-size: 28px;
+  margin-bottom: 18px;
+  color: #00e5ff;
+  text-shadow: 0 0 14px rgba(0, 229, 255, 0.9);
+  animation: glowText 3s ease-in-out infinite alternate, glitch 3s infinite;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Glitch duplicate layers */
+.voice-assistant h2::before,
+.voice-assistant h2::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0.8;
+}
+
+.voice-assistant h2::before {
+  animation: glitchTop 2s infinite linear;
+  color: #ff00ff;
+}
+
+.voice-assistant h2::after {
+  animation: glitchBottom 2s infinite linear;
+  color: #00ffea;
+}
+
+/* Microphone button ripple effect */
+button {
+  padding: 16px 34px;
+  margin: 15px 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  color: white;
+  border: none;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 22px rgba(0, 212, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 200%;
+  height: 200%;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease;
+}
+
+button:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Listening pulse */
+button.listening {
+  animation: micPulse 1.5s infinite;
+  background: linear-gradient(135deg, #00d4ff, #007bff);
+}
+
+/* Typing dots */
+.typing span {
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  background: #ffea00;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+
+/* Wave animation */
+.wave div {
+  width: 5px;
+  height: 22px;
+  margin: 0 2px;
+  background: #00e5ff;
+  border-radius: 5px;
+  animation: waveAnim 1.2s infinite;
+}
+
+/* --- Keyframes --- */
+@keyframes aurora { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+@keyframes fadeIn { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
+@keyframes glowText { from{text-shadow:0 0 10px #00e5ff;} to{text-shadow:0 0 40px #00e5ff,0 0 80px #00e5ff;} }
+@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);} }
+@keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);} }
+@keyframes breathe {0%,100%{transform:scale(1);}50%{transform:scale(1.05);} }
+@keyframes micPulse {0%{box-shadow:0 0 0 0 rgba(0,212,255,0.6);}70%{box-shadow:0 0 0 25px rgba(0,212,255,0);}100%{box-shadow:0 0 0 0 rgba(0,212,255,0);} }
+@keyframes bounce {0%,80%,100%{transform:scale(0.8);}40%{transform:scale(1.4);} }
+@keyframes waveAnim {0%{height:6px;}50%{height:30px;}100%{height:6px;} }
+@keyframes floatOrb {0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-40px) scale(1.15);} }
+@keyframes auraGlow {from{box-shadow:0 0 20px #00e5ff;}to{box-shadow:0 0 60px #00e5ff,0 0 100px #ff00ff;} }
+@keyframes sparkMove {from{transform:translateY(0) translateX(0);}to{transform:translateY(-120vh) translateX(40vw);} }
+@keyframes glitchTop {0%{clip-path:inset(0 0 80% 0);}50%{clip-path:inset(0 0 60% 0);}100%{clip-path:inset(0 0 80% 0);} }
+@keyframes glitchBottom {0%{clip-path:inset(20% 0 0 0);}50%{clip-path:inset(40% 0 0 0);}100%{clip-path:inset(20% 0 0 0);} }
+@keyframes glitch {0%{transform:translate(0);}20%{transform:translate(-2px,2px);}40%{transform:translate(-2px,-2px);}60%{transform:translate(2px,2px);}80%{transform:translate(2px,-2px);}100%{transform:translate(0);} }
+
+
+/* --- Existing CSS remains unchanged above --- */
+
+/* --- Responsive adjustments for mobile devices --- */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  .voice-assistant {
+    width: 90%;
+    padding: 25px;
+    border-radius: 18px;
+  }
+
+  .voice-assistant img {
+    width: 140px;
+    margin-bottom: 15px;
+  }
+
+  .voice-assistant h2 {
+    font-size: 22px;
+    letter-spacing: 1.5px;
+  }
+
+  button {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .typing span {
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+  }
+
+  .wave div {
+    width: 4px;
+    height: 18px;
+    margin: 0 1.5px;
+  }
+
+  /* Reduce floating orb size and blur for mobile performance */
+  body::before, body::after {
+    width: 400px;
+    height: 400px;
+    filter: blur(80px);
+  }
+
+  body::before {
+    top: -150px;
+    left: -150px;
+  }
+
+  body::after {
+    bottom: -120px;
+    right: -120px;
+  }
+
+  .spark {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* Very small screens like iPhone SE */
+@media (max-width: 480px) {
+  .voice-assistant {
+    padding: 20px;
+  }
+
+  .voice-assistant img {
+    width: 120px;
+  }
+
+  .voice-assistant h2 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .wave div {
+    width: 3px;
+    height: 14px;
+  }
+
+  .typing span {
+    width: 5px;
+    height: 5px;
+  }
+}

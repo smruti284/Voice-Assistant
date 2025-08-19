@@ -1,0 +1,35 @@
+$colorBlack: black;
+$colorWhite: white;
+
+@mixin inputStyle {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid red;
+    background: $colorWhite;
+}
+
+.App {
+    height: 100vh;
+    width: 100%;
+    background: $colorBlack;
+    color: $colorWhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form {
+        height: auto;
+        width: 300px;
+        border: 1px solid $colorWhite;
+        text-align: center;
+        input {
+            @include inputStyle();
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            width: 150px;
+        }
+    }
+}
